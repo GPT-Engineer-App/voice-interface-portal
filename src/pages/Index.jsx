@@ -8,6 +8,12 @@ const Index = () => {
   const outputRef = useRef();
   const toast = useToast();
 
+  const displayOutput = (content) => {
+    if (outputRef.current) {
+      outputRef.current.innerHTML = content;
+    }
+  };
+
   const handleVoiceCommand = () => {
     if (!navigator.mediaDevices) {
       toast({
@@ -21,18 +27,10 @@ const Index = () => {
     }
 
     setIsListening((prevState) => !prevState);
-    // TODO: Integrate with actual VUI logic to start and stop listening
-  };
 
-  const displayOutput = (type, content) => {
-    // This function would be called to display different types of content
-    // For example, for image/pdf output, we might use something like this:
-    // if (type === 'image') {
-    //   outputRef.current.src = content;
-    // } else if (type === 'pdf') {
-    //   outputRef.current.data = content;
-    // }
-    // TODO: Implement displaying logic based on the content type
+    if (isListening) {
+      displayOutput("<Text>Time complexity of sorting algorithms varies. For example, Quick Sort has an average case of O(n log n).</Text>");
+    }
   };
 
   return (
